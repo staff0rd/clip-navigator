@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import YouTube from "react-youtube";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
+import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import IconButton from "@material-ui/core/IconButton";
 import FormControl from "@material-ui/core/FormControl";
@@ -13,7 +14,15 @@ export const YoutubePlayer = (props) => {
   const player = useRef(null);
   const { video } = props;
   const [currentClip, setCurrentClip] = useState(1);
+  const [currentTime, setCurrentTime] = useState(null);
   const clip = video.clips.find((d) => d.level === currentClip);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentTime(null);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [currentTime]);
 
   const playCurrentClip = useCallback(() => {
     if (player.current) {
@@ -43,6 +52,10 @@ export const YoutubePlayer = (props) => {
 
   const previous = () => {
     if (currentClip > 1) setCurrentClip(currentClip - 1);
+  };
+
+  const echo = () => {
+    setCurrentTime(Math.floor(player.current.getCurrentTime()));
   };
 
   return (
@@ -75,6 +88,10 @@ export const YoutubePlayer = (props) => {
       <IconButton aria-label="next" onClick={next}>
         <SkipNextIcon />
       </IconButton>
+      <IconButton aria-label="next" onClick={echo}>
+        <AccessAlarmIcon />
+      </IconButton>
+      <span>{currentTime}</span>
       <Typography variant="h6">Special</Typography>
       <Typography variant="body1">
         {clip.special ? clip.special : "-"}
