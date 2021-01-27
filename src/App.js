@@ -6,6 +6,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import data from "./data";
+import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
+import SkipNextIcon from "@material-ui/icons/SkipNext";
+import IconButton from "@material-ui/core/IconButton";
+import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,23 +19,34 @@ const useStyles = makeStyles((theme) => ({
   },
   selectors: {
     marginBottom: theme.spacing(1),
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  selectVideo: {
+    minWidth: 200,
   },
 }));
 
 function App() {
   const classes = useStyles();
-  const [currentVideoId, setCurrentVideoId] = useState(data[0].videoId);
+  const videoWidth = 640;
+  const videoHeight = 360;
+  const [videoId, setVideoId] = useState("");
   const [currentVideo, setCurrentVideo] = useState(
-    data.find((v) => v.videoId === currentVideoId)
+    data.find((v) => v.videoId === videoId)
   );
+  const [currentClip, setCurrentClip] = useState(1);
+  const clip = currentVideo
+    ? currentVideo.clips.find((d) => d.level === currentClip)
+    : "";
 
   useEffect(() => {
-    const video = data.find((v) => v.videoId === currentVideoId);
+    const video = data.find((v) => v.videoId === videoId);
     setCurrentVideo(video);
     window.localStorage.setItem("video", JSON.stringify(video));
-  }, [currentVideoId]);
+  }, [videoId]);
 
-  const newClipCallback = (newClip) => {
+  const newClip = (newClip) => {
     const newVideo = {
       ...currentVideo,
       clips: [...currentVideo.clips, newClip],
@@ -38,7 +55,7 @@ function App() {
     setCurrentVideo(newVideo);
   };
 
-  const deleteClipCallback = () => {
+  const deleteClip = () => {
     const newVideo = {
       ...currentVideo,
       clips: [...currentVideo.clips.slice(0, currentVideo.clips.length - 1)],
@@ -47,20 +64,45 @@ function App() {
     setCurrentVideo(newVideo);
   };
 
+  const nextClip = () => {
+    console.log("setting to ", currentClip + 1);
+    if (currentVideo.clips.length > currentClip + 1) {
+      setCurrentClip(currentClip + 1);
+    }
+  };
+
+  const previousClip = () => {
+    if (currentClip > 1) setCurrentClip(currentClip - 1);
+  };
+
+  const stamp = () => {
+    // const time = Math.floor(player.current.getCurrentTime());
+    // navigator.clipboard.writeText(time);
+    // newClip({ level: currentVideo.clips.length + 1, timestamp: time });
+  };
+
+  const deleteLast = () => {
+    setCurrentClip(currentVideo.clips.length - 1);
+    deleteClip();
+  };
+
   return (
     <div className={classes.root}>
       <div className={classes.selectors}>
-        <FormControl variant="outlined">
-          <InputLabel id="video-label">Video</InputLabel>
+        <FormControl variant="outlined" className={classes.selectVideo}>
+          <InputLabel id="video-label">Choose video</InputLabel>
           <Select
             labelId="video-label"
             id="video-select"
-            value={currentVideoId}
+            value={videoId}
             onChange={(e) => {
-              setCurrentVideoId(e.target.value);
+              setVideoId(e.target.value);
             }}
-            label="Video"
+            label="Choose video"
           >
+            <MenuItem value={""} disabled>
+              Choose video...
+            </MenuItem>
             {data.map((v, ix) => (
               <MenuItem key={`video-${ix}`} value={v.videoId}>
                 {v.name}
@@ -68,12 +110,58 @@ function App() {
             ))}
           </Select>
         </FormControl>
+        <div className={classes.cliptools}>
+          <IconButton aria-label="stamp" onClick={stamp}>
+            <AccessAlarmIcon />
+          </IconButton>
+          <IconButton aria-label="delete" onClick={deleteLast}>
+            <DeleteIcon />
+          </IconButton>
+        </div>
+        {currentVideo && (
+          <div className={classes.navigate}>
+            <IconButton aria-label="previous" onClick={previousClip}>
+              <SkipPreviousIcon />
+            </IconButton>
+            <FormControl variant="outlined">
+              <InputLabel id="demo-simple-select-outlined-label">
+                Level
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={currentClip}
+                onChange={(e) => {
+                  setCurrentClip(e.target.value);
+                }}
+                label="Level"
+              >
+                {currentVideo.clips.map((d, ix) => (
+                  <MenuItem
+                    key={`clip-${ix}`}
+                    value={d.level}
+                  >{`Level ${d.level}`}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <IconButton aria-label="next" onClick={nextClip}>
+              <SkipNextIcon />
+            </IconButton>
+          </div>
+        )}
       </div>
-      <YoutubePlayer
-        video={currentVideo}
-        newClip={newClipCallback}
-        deleteClip={deleteClipCallback}
-      />
+      {currentVideo ? (
+        <YoutubePlayer
+          videoId={videoId}
+          newClip={newClip}
+          deleteClip={deleteClip}
+          clip={clip}
+          videoWidth={videoWidth}
+          videoHeight={videoHeight}
+        />
+      ) : (
+        <Skeleton variant="rect" width={videoWidth} height={videoHeight} />
+      )}
     </div>
   );
 }
