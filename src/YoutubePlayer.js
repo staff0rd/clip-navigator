@@ -82,7 +82,7 @@ export const YoutubePlayer = (props) => {
       <YouTube
         videoId={video.videoId}
         onReady={onReady}
-        opts={{ playerVars: { autoPlay: 1 } }}
+        opts={{ playerVars: { autoPlay: 1, modestbranding: 1 } }}
       />
       <IconButton aria-label="previous" onClick={previous}>
         <SkipPreviousIcon />
