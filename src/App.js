@@ -158,6 +158,7 @@ function App() {
           clip={clip}
           videoWidth={videoWidth}
           videoHeight={videoHeight}
+          start={clip?.timestamp || 0}
         />
       ) : (
         <Skeleton variant="rect" width={videoWidth} height={videoHeight} />
