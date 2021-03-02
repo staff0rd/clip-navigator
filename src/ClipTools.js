@@ -3,7 +3,17 @@ import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 export const ClipTools = (props) => {
-  const { setCurrentClip, currentVideo, setCurrentVideo, playerTime } = props;
+  const {
+    setCurrentClipNumber,
+    currentClipNumber,
+    currentVideo,
+    setCurrentVideo,
+    playerTime,
+  } = props;
+
+  const showTools =
+    currentClipNumber ===
+    currentVideo.clips[currentVideo.clips.length - 1].level;
 
   const newClip = (clip) => {
     const newVideo = {
@@ -30,17 +40,21 @@ export const ClipTools = (props) => {
   };
 
   const deleteLast = () => {
-    setCurrentClip(currentVideo.clips.length - 1);
+    setCurrentClipNumber(currentVideo.clips.length - 1);
     deleteClip();
   };
   return (
     <div>
-      <IconButton aria-label="stamp" onClick={stamp}>
-        <AccessAlarmIcon />
-      </IconButton>
-      <IconButton aria-label="delete" onClick={deleteLast}>
-        <DeleteIcon />
-      </IconButton>
+      {showTools && (
+        <>
+          <IconButton aria-label="stamp" onClick={stamp}>
+            <AccessAlarmIcon />
+          </IconButton>
+          <IconButton aria-label="delete" onClick={deleteLast}>
+            <DeleteIcon />
+          </IconButton>
+        </>
+      )}
     </div>
   );
 };

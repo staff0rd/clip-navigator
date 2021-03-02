@@ -12,9 +12,13 @@ import { ClipTools } from "./ClipTools";
 import { ClipDetails } from "./ClipDetails";
 import { getClipNumberFromPlayerTime } from "./getClipNumberFromPlayerTime";
 
+const videoWidth = 640;
+const videoHeight = 360;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1),
+    width: videoWidth,
   },
   selectors: {
     marginBottom: theme.spacing(1),
@@ -28,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const videoWidth = 640;
-  const videoHeight = 360;
+
   const [videoId, setVideoId] = useState("");
   const [playerTime, setPlayerTime] = useState(null);
   const [currentVideo, setCurrentVideoState] = useState(
@@ -88,7 +91,8 @@ function App() {
         {currentVideo && (
           <>
             <ClipTools
-              setCurrentClip={setCurrentClipNumber}
+              setCurrentClipNumber={setCurrentClipNumber}
+              currentClipNumber={playerInferredClipNumber}
               currentVideo={currentVideo}
               setCurrentVideo={setCurrentVideo}
               playerTime={playerTime}
