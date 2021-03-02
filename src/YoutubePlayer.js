@@ -1,11 +1,30 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 import { useKeyPress } from "./useKeyPressed";
 import { ClipDetails } from "./ClipDetails";
 
 export const YoutubePlayer = (props) => {
   const player = useRef(null);
-  const { videoId, clip, videoHeight, videoWidth, start } = props;
+  const {
+    videoId,
+    clip,
+    videoHeight,
+    videoWidth,
+    start,
+    setPlayerTime,
+  } = props;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (
+        player.current &&
+        player.current.getPlayerState() === YouTube.PlayerState.PLAYING
+      ) {
+        setPlayerTime(player.current.getCurrentTime());
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   useKeyPress("ArrowLeft", () =>
     player.current.seekTo(Math.floor(player.current.getCurrentTime()) - 5, true)

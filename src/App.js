@@ -29,6 +29,7 @@ function App() {
   const videoWidth = 640;
   const videoHeight = 360;
   const [videoId, setVideoId] = useState("");
+  const [playerTime, setPlayerTime] = useState(null);
   const [currentVideo, setCurrentVideo] = useState(
     data.find((v) => v.videoId === videoId)
   );
@@ -73,6 +74,7 @@ function App() {
               setCurrentClip={setCurrentClip}
               currentVideo={currentVideo}
               setCurrentVideo={setCurrentVideo}
+              playerTime={playerTime}
             />
             <ClipNavigator
               currentClip={currentClip}
@@ -89,6 +91,7 @@ function App() {
           videoWidth={videoWidth}
           videoHeight={videoHeight}
           start={clip?.timestamp || 0}
+          setPlayerTime={setPlayerTime}
         />
       ) : (
         <Skeleton variant="rect" width={videoWidth} height={videoHeight} />

@@ -3,7 +3,7 @@ import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 export const ClipTools = (props) => {
-  const { setCurrentClip, currentVideo, setCurrentVideo } = props;
+  const { setCurrentClip, currentVideo, setCurrentVideo, playerTime } = props;
 
   const newClip = (newClip) => {
     const newVideo = {
@@ -23,9 +23,9 @@ export const ClipTools = (props) => {
     setCurrentVideo(newVideo);
   };
   const stamp = () => {
-    // const time = Math.floor(player.current.getCurrentTime());
-    // navigator.clipboard.writeText(time);
-    // newClip({ level: currentVideo.clips.length + 1, timestamp: time });
+    const time = Math.floor(playerTime);
+    navigator.clipboard.writeText(time);
+    newClip({ level: currentVideo.clips.length + 1, timestamp: time });
   };
 
   const deleteLast = () => {
