@@ -66,7 +66,7 @@ function App() {
 
   const nextClip = () => {
     console.log("setting to ", currentClip + 1);
-    if (currentVideo.clips.length > currentClip + 1) {
+    if (currentVideo.clips.length > currentClip) {
       setCurrentClip(currentClip + 1);
     }
   };
