@@ -9,6 +9,8 @@ import data from "./data";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { ClipNavigator } from "./ClipNavigator";
 import { ClipTools } from "./ClipTools";
+import { ClipDetails } from "./ClipDetails";
+import { getClipNumberFromPlayerTime } from "./getClipNumberFromPlayerTime";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +32,27 @@ function App() {
   const videoHeight = 360;
   const [videoId, setVideoId] = useState("");
   const [playerTime, setPlayerTime] = useState(null);
-  const [currentVideo, setCurrentVideo] = useState(
+  const [currentVideo, setCurrentVideoState] = useState(
     data.find((v) => v.videoId === videoId)
   );
-  const [currentClip, setCurrentClip] = useState(1);
+  const setCurrentVideo = (video) => {
+    setCurrentVideoState(video);
+    setCurrentClipNumber(playerInferredClipNumber);
+    setPlayerTime(null);
+  };
+  const [currentClipNumber, setCurrentClipNumberState] = useState(1);
+  const setCurrentClipNumber = (clipNumber) => {
+    setCurrentClipNumberState(clipNumber);
+    setPlayerTime(null);
+  };
   const clip = currentVideo
-    ? currentVideo.clips.find((d) => d.level === currentClip)
+    ? currentVideo.clips.find((d) => d.level === currentClipNumber)
     : "";
+
+  const playerInferredClipNumber = currentVideo
+    ? getClipNumberFromPlayerTime(currentVideo.clips, playerTime) ||
+      currentClipNumber
+    : currentClipNumber;
 
   useEffect(() => {
     const video = data.find((v) => v.videoId === videoId);
@@ -71,28 +87,36 @@ function App() {
         {currentVideo && (
           <>
             <ClipTools
-              setCurrentClip={setCurrentClip}
+              setCurrentClip={setCurrentClipNumber}
               currentVideo={currentVideo}
               setCurrentVideo={setCurrentVideo}
               playerTime={playerTime}
             />
             <ClipNavigator
-              currentClip={currentClip}
-              setCurrentClip={setCurrentClip}
+              currentClipNumber={playerInferredClipNumber}
+              setCurrentClipNumber={setCurrentClipNumber}
               currentVideo={currentVideo}
             />
           </>
         )}
       </div>
       {currentVideo ? (
-        <YoutubePlayer
-          videoId={videoId}
-          clip={clip}
-          videoWidth={videoWidth}
-          videoHeight={videoHeight}
-          start={clip?.timestamp || 0}
-          setPlayerTime={setPlayerTime}
-        />
+        <>
+          <YoutubePlayer
+            videoId={videoId}
+            clip={clip}
+            videoWidth={videoWidth}
+            videoHeight={videoHeight}
+            start={clip?.timestamp || 0}
+            setPlayerTime={setPlayerTime}
+          />
+          <ClipDetails
+            clip={clip}
+            playerTime={Math.round(
+              playerTime - currentVideo.clips[0].timestamp
+            )}
+          />
+        </>
       ) : (
         <Skeleton variant="rect" width={videoWidth} height={videoHeight} />
       )}

@@ -1,18 +1,10 @@
 import { useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 import { useKeyPress } from "./useKeyPressed";
-import { ClipDetails } from "./ClipDetails";
 
 export const YoutubePlayer = (props) => {
   const player = useRef(null);
-  const {
-    videoId,
-    clip,
-    videoHeight,
-    videoWidth,
-    start,
-    setPlayerTime,
-  } = props;
+  const { videoId, videoHeight, videoWidth, start, setPlayerTime } = props;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +26,6 @@ export const YoutubePlayer = (props) => {
   );
 
   const onReady = (event) => {
-    console.warn("onReady");
     player.current = event.target;
   };
 
@@ -65,18 +56,15 @@ export const YoutubePlayer = (props) => {
   };
 
   return (
-    <>
-      <YouTube
-        videoId={videoId}
-        onReady={onReady}
-        onStateChange={onStateChange}
-        opts={{
-          height: videoHeight,
-          width: videoWidth,
-          playerVars: { autoplay: 1, modestbranding: 1, start },
-        }}
-      />
-      <ClipDetails clip={clip} />
-    </>
+    <YouTube
+      videoId={videoId}
+      onReady={onReady}
+      onStateChange={onStateChange}
+      opts={{
+        height: videoHeight,
+        width: videoWidth,
+        playerVars: { autoplay: 1, modestbranding: 1, start },
+      }}
+    />
   );
 };
