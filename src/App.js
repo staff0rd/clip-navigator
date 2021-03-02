@@ -94,7 +94,7 @@ function App() {
               setCurrentClipNumber={setCurrentClipNumber}
               currentClipNumber={playerInferredClipNumber}
               currentVideo={currentVideo}
-              setCurrentVideo={setCurrentVideo}
+              setCurrentVideo={setCurrentVideoState}
               playerTime={playerTime}
             />
             <ClipNavigator
