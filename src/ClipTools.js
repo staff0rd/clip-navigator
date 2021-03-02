@@ -5,10 +5,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 export const ClipTools = (props) => {
   const { setCurrentClip, currentVideo, setCurrentVideo, playerTime } = props;
 
-  const newClip = (newClip) => {
+  const newClip = (clip) => {
     const newVideo = {
       ...currentVideo,
-      clips: [...currentVideo.clips, newClip],
+      clips: [...currentVideo.clips, clip],
     };
     window.localStorage.setItem("video", JSON.stringify(newVideo));
     setCurrentVideo(newVideo);
@@ -22,6 +22,7 @@ export const ClipTools = (props) => {
     window.localStorage.setItem("video", JSON.stringify(newVideo));
     setCurrentVideo(newVideo);
   };
+
   const stamp = () => {
     const time = Math.floor(playerTime);
     navigator.clipboard.writeText(time);

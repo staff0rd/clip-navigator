@@ -5,7 +5,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
-import data from "./data";
+import data from "./bubble-bobble";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { ClipNavigator } from "./ClipNavigator";
 import { ClipTools } from "./ClipTools";
@@ -58,6 +58,7 @@ function App() {
     const video = data.find((v) => v.videoId === videoId);
     setCurrentVideo(video);
     window.localStorage.setItem("video", JSON.stringify(video));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId]);
 
   return (
