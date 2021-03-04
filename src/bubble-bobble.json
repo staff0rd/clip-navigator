@@ -120,7 +120,22 @@
       { "level": 47, "timestamp": 1506 },
       { "level": 48, "timestamp": 1538 },
       { "level": 49, "timestamp": 1570 },
-      { "level": 50, "timestamp": 1620 }
+      { "level": 50, "timestamp": 1620 },
+      { "level": 51, "timestamp": 1639 },
+      { "level": 52, "timestamp": 1670 },
+      { "level": 53, "timestamp": 1687 },
+      { "level": 54, "timestamp": 1725 },
+      { "level": 55, "timestamp": 1759 },
+      { "level": 56, "timestamp": 1791 },
+      { "level": 57, "timestamp": 1816 },
+      { "level": 58, "timestamp": 1849 },
+      { "level": 59, "timestamp": 1866 },
+      { "level": 60, "timestamp": 1893 },
+      { "level": 61, "timestamp": 1914 },
+      { "level": 62, "timestamp": 1957 },
+      { "level": 63, "timestamp": 1985 },
+      { "level": 64, "timestamp": 2032 },
+      { "level": 65, "timestamp": 2050 }
     ]
   },
   {
@@ -234,7 +249,12 @@
       { "level": 57, "timestamp": 2269 },
       { "level": 58, "timestamp": 2325 },
       { "level": 59, "timestamp": 2362 },
-      { "level": 60, "timestamp": 2389 }
+      { "level": 60, "timestamp": 2389 },
+      { "level": 61, "timestamp": 2429 },
+      { "level": 62, "timestamp": 2470 },
+      { "level": 63, "timestamp": 2492 },
+      { "level": 64, "timestamp": 2518 },
+      { "level": 65, "timestamp": 2547 }
     ]
   }
 ]
