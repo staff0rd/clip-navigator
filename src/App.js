@@ -32,17 +32,10 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-
+  const [videos, setVideos] = useState(data);
   const [videoId, setVideoId] = useState("");
   const [playerTime, setPlayerTime] = useState(null);
-  const [currentVideo, setCurrentVideoState] = useState(
-    data.find((v) => v.videoId === videoId)
-  );
-  const setCurrentVideo = (video) => {
-    setCurrentVideoState(video);
-    setCurrentClipNumber(playerInferredClipNumber);
-    setPlayerTime(null);
-  };
+  const currentVideo = videos.find((v) => v.videoId === videoId);
   const [currentClipNumber, setCurrentClipNumberState] = useState(1);
   const setCurrentClipNumber = (clipNumber) => {
     setCurrentClipNumberState(clipNumber);
@@ -56,13 +49,6 @@ function App() {
     ? getClipNumberFromPlayerTime(currentVideo.clips, playerTime) ||
       currentClipNumber
     : currentClipNumber;
-
-  useEffect(() => {
-    const video = data.find((v) => v.videoId === videoId);
-    setCurrentVideo(video);
-    window.localStorage.setItem("video", JSON.stringify(video));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoId]);
 
   return (
     <div className={classes.root}>
@@ -94,13 +80,14 @@ function App() {
               setCurrentClipNumber={setCurrentClipNumber}
               currentClipNumber={playerInferredClipNumber}
               currentVideo={currentVideo}
-              setCurrentVideo={setCurrentVideoState}
               playerTime={playerTime}
+              setVideos={setVideos}
+              videos={videos}
             />
             <ClipNavigator
               currentClipNumber={playerInferredClipNumber}
               setCurrentClipNumber={setCurrentClipNumber}
-              currentVideo={currentVideo}
+              clips={currentVideo.clips}
             />
           </>
         )}

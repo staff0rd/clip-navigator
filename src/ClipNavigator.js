@@ -7,10 +7,10 @@ import SkipNextIcon from "@material-ui/icons/SkipNext";
 import IconButton from "@material-ui/core/IconButton";
 
 export const ClipNavigator = (props) => {
-  const { currentClipNumber, setCurrentClipNumber, currentVideo } = props;
+  const { currentClipNumber, setCurrentClipNumber, clips } = props;
   const nextClip = () => {
     console.log("setting to ", currentClipNumber + 1);
-    if (currentVideo.clips.length > currentClipNumber) {
+    if (clips.length > currentClipNumber) {
       setCurrentClipNumber(currentClipNumber);
       setCurrentClipNumber(currentClipNumber + 1);
     }
@@ -35,7 +35,7 @@ export const ClipNavigator = (props) => {
           }}
           label="Level"
         >
-          {currentVideo.clips.map((d, ix) => (
+          {clips.map((d, ix) => (
             <MenuItem
               key={`clip-${ix}`}
               value={d.level}

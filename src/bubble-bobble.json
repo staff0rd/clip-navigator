@@ -135,7 +135,12 @@
       { "level": 62, "timestamp": 1957 },
       { "level": 63, "timestamp": 1985 },
       { "level": 64, "timestamp": 2032 },
-      { "level": 65, "timestamp": 2050 }
+      { "level": 65, "timestamp": 2050 },
+      { "level": 66, "timestamp": 2093 },
+      { "level": 67, "timestamp": 2127 },
+      { "level": 68, "timestamp": 2168 },
+      { "level": 69, "timestamp": 2196 },
+      { "level": 70, "timestamp": 2214 }
     ]
   },
   {
@@ -254,7 +259,12 @@
       { "level": 62, "timestamp": 2470 },
       { "level": 63, "timestamp": 2492 },
       { "level": 64, "timestamp": 2518 },
-      { "level": 65, "timestamp": 2547 }
+      { "level": 65, "timestamp": 2547 },
+      { "level": 66, "timestamp": 2603 },
+      { "level": 67, "timestamp": 2636 },
+      { "level": 68, "timestamp": 2673 },
+      { "level": 69, "timestamp": 2720 },
+      { "level": 70, "timestamp": 2759 }
     ]
   }
 ]

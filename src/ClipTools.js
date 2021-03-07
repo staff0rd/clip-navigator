@@ -1,14 +1,19 @@
+import { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import DeleteIcon from "@material-ui/icons/Delete";
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import copy from "copy-to-clipboard";
+import Snackbar from "@material-ui/core/Snackbar";
 
 export const ClipTools = (props) => {
   const {
     setCurrentClipNumber,
     currentClipNumber,
     currentVideo,
-    setCurrentVideo,
     playerTime,
+    videos,
+    setVideos,
   } = props;
 
   const showTools =
@@ -16,12 +21,16 @@ export const ClipTools = (props) => {
     currentVideo.clips[currentVideo.clips.length - 1].level;
 
   const newClip = (clip) => {
+    const clips = [...currentVideo.clips, clip];
     const newVideo = {
       ...currentVideo,
-      clips: [...currentVideo.clips, clip],
+      clips,
     };
-    window.localStorage.setItem("video", JSON.stringify(newVideo));
-    setCurrentVideo(newVideo);
+
+    setVideos([...videos.map((v) => (v === currentVideo ? newVideo : v))]);
+    videos.forEach((v) => {
+      console.log(v.name, v.clips.length);
+    });
   };
 
   const deleteClip = () => {
@@ -29,19 +38,28 @@ export const ClipTools = (props) => {
       ...currentVideo,
       clips: [...currentVideo.clips.slice(0, currentVideo.clips.length - 1)],
     };
-    window.localStorage.setItem("video", JSON.stringify(newVideo));
-    setCurrentVideo(newVideo);
+    setVideos([...videos.map((v) => (v === currentVideo ? newVideo : v))]);
   };
 
   const stamp = () => {
     const time = Math.floor(playerTime);
-    navigator.clipboard.writeText(time);
     newClip({ level: currentVideo.clips.length + 1, timestamp: time });
   };
 
   const deleteLast = () => {
     setCurrentClipNumber(currentVideo.clips.length - 1);
     deleteClip();
+  };
+
+  const [open, setOpen] = useState(false);
+  const exportJson = () => {
+    setOpen(true);
+    copy("");
+    const payload = JSON.stringify(videos);
+    copy(payload);
+    videos.forEach((v) => {
+      console.log(v.name, v.clips.length);
+    });
   };
   return (
     <div>
@@ -53,6 +71,19 @@ export const ClipTools = (props) => {
           <IconButton aria-label="delete" onClick={deleteLast}>
             <DeleteIcon />
           </IconButton>
+          <IconButton aria-label="export" onClick={exportJson}>
+            <SaveAltIcon />
+          </IconButton>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            open={open}
+            autoHideDuration={1000}
+            onClose={() => setOpen(false)}
+            message="JSON copied to clipboard"
+          />
         </>
       )}
     </div>
