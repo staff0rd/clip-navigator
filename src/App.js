@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   selectVideo: {
     minWidth: 200,
+    maxWidth: 290,
   },
 }));
 
