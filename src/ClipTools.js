@@ -5,6 +5,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import copy from "copy-to-clipboard";
 import Snackbar from "@material-ui/core/Snackbar";
+import { useKeyPress } from "./useKeyPressed";
 
 export const ClipTools = (props) => {
   const {
@@ -15,6 +16,13 @@ export const ClipTools = (props) => {
     videos,
     setVideos,
   } = props;
+
+  useKeyPress("z", () => {
+    stamp();
+  });
+  useKeyPress("x", () => {
+    deleteLast();
+  });
 
   const showTools =
     currentClipNumber ===
@@ -65,10 +73,18 @@ export const ClipTools = (props) => {
     <div>
       {showTools && (
         <>
-          <IconButton aria-label="stamp" onClick={stamp}>
+          <IconButton
+            aria-label="stamp"
+            onClick={stamp}
+            title="New clip here (z)"
+          >
             <AccessAlarmIcon />
           </IconButton>
-          <IconButton aria-label="delete" onClick={deleteLast}>
+          <IconButton
+            aria-label="delete"
+            onClick={deleteLast}
+            title="Delete (x)"
+          >
             <DeleteIcon />
           </IconButton>
           <IconButton aria-label="export" onClick={exportJson}>
