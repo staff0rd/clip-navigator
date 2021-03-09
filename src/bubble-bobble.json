@@ -1,7 +1,25 @@
 [
   {
+    "videoId": "21449598",
+    "type": "Vzaar",
+    "name": "M.A.M.E. - Bubble Bobble - Points [1 Player Only] - 9,999,990 - GIL",
+    "clips": [
+      { "level": 1, "timestamp": 21 },
+      { "level": 2, "timestamp": 44 },
+      { "level": 3, "timestamp": 68 },
+      { "level": 4, "timestamp": 97 },
+      { "level": 5, "timestamp": 120 },
+      { "level": 6, "timestamp": 152 },
+      { "level": 7, "timestamp": 188 },
+      { "level": 8, "timestamp": 204 },
+      { "level": 9, "timestamp": 229 },
+      { "level": 10, "timestamp": 259 }
+    ]
+  },
+  {
     "videoId": "nXsZWoHVhog",
     "name": "Stafford Williams - Level 1-43",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "totalscore": 24740, "score": 24740, "timestamp": 0.1 },
       { "level": 2, "timestamp": 23 },
@@ -51,6 +69,7 @@
   {
     "videoId": "BuXOSBb4hQw",
     "name": "World of Long Plays - Arcade Long Play",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "timestamp": 42 },
       { "level": 2, "timestamp": 57 },
@@ -132,6 +151,7 @@
   {
     "videoId": "kTR0xqRCfUk",
     "name": "Al82_Retro - Long Play - 4,510,520 pts",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "timestamp": 78 },
       { "level": 2, "timestamp": 93 },
@@ -209,6 +229,7 @@
   {
     "videoId": "58mEGmQUtFk",
     "name": "ben忍 - (Power Up) - 7,903,130 pts",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "timestamp": 27 },
       { "level": 2, "timestamp": 46 },
@@ -305,6 +326,7 @@
   {
     "videoId": "r02ull7WEZU",
     "name": "byrar - (Tool Assisted) - 9,999,990 pts",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "timestamp": 13 },
       { "level": 2, "timestamp": 27 },
@@ -401,6 +423,7 @@
   {
     "videoId": "eE1Fx_93jiI",
     "name": "ben忍 - (Power Up) - 9,999,990 pts",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "timestamp": 28 },
       { "level": 2, "timestamp": 48 },
@@ -478,6 +501,7 @@
   {
     "videoId": "jEp_83ikpkw",
     "name": "Matthew Neja - 5,6946,660 pts",
+    "type": "YouTube",
     "clips": [
       {
         "level": 1,
@@ -604,6 +628,7 @@
   {
     "videoId": "SmwQViO5pao",
     "name": "Matthew Neja - 4,136,190 pts",
+    "type": "YouTube",
     "clips": [
       { "level": 1, "timestamp": 32 },
       { "level": 2, "timestamp": 94 },

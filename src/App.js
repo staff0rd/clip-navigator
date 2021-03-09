@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
+import { VzaarPlayer } from "./VzaarPlayer";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -96,14 +97,24 @@ function App() {
       </div>
       {currentVideo ? (
         <>
-          <YoutubePlayer
-            videoId={videoId}
-            clip={clip}
-            videoWidth={videoWidth}
-            videoHeight={videoHeight}
-            start={clip?.timestamp || 0}
-            setPlayerTime={setPlayerTime}
-          />
+          {currentVideo.type === "YouTube" && (
+            <YoutubePlayer
+              videoId={videoId}
+              videoWidth={videoWidth}
+              videoHeight={videoHeight}
+              start={clip?.timestamp || 0}
+              setPlayerTime={setPlayerTime}
+            />
+          )}
+          {currentVideo.type === "Vzaar" && (
+            <VzaarPlayer
+              videoId={videoId}
+              videoWidth={videoWidth}
+              videoHeight={videoHeight}
+              start={clip?.timestamp || 0}
+              setPlayerTime={setPlayerTime}
+            />
+          )}
           <ClipDetails
             clip={clip}
             playerTime={Math.round(
