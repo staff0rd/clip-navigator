@@ -61,6 +61,7 @@ function App() {
             id="video-select"
             value={videoId}
             onChange={(e) => {
+              setCurrentClipNumber(playerInferredClipNumber);
               setVideoId(e.target.value);
             }}
             label="Choose video"
