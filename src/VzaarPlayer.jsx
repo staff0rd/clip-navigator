@@ -9,7 +9,6 @@ export const VzaarPlayer = ({
   setPlayerTime,
   videoId,
 }) => {
-  const [ready, setReady] = useState(false);
   // eslint-disable-next-line no-undef
   const player = useRef(null);
   const [startTime, setStartTime] = useState(0);
@@ -22,17 +21,17 @@ export const VzaarPlayer = ({
   }, [start]);
 
   useEffect(() => {
-    if (startTime && player && ready && player.current) {
+    if (startTime && player.current && player.current) {
       player.current.seekTo(start);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [start, player, ready]);
+  }, [start, player.current]);
 
   useEffect(() => {
+    player.current = null;
     // eslint-disable-next-line no-undef
     const vzp = new vzPlayer(`vzvd-${videoId}`);
     vzp.ready(function () {
-      setReady(true);
       vzp.seekTo(start);
       player.current = vzp;
     });
@@ -40,7 +39,7 @@ export const VzaarPlayer = ({
       vzp.removeEventListener("ready");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [videoId]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,7 +68,7 @@ export const VzaarPlayer = ({
     <iframe
       width={videoWidth}
       height={videoHeight}
-      src="//view.vzaar.com/21449598/player?autoplay=true"
+      src={`//view.vzaar.com/${videoId}/player?autoplay=true`}
       frameborder="0"
       allowfullscreen="true"
       allowtransparency="true"
