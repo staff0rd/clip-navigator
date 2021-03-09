@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import { VzaarPlayer } from "./VzaarPlayer";
 import FormControl from "@material-ui/core/FormControl";
@@ -15,6 +15,10 @@ import { getClipNumberFromPlayerTime } from "./getClipNumberFromPlayerTime";
 
 const videoWidth = 640;
 const videoHeight = 360;
+
+const dataSorted = data.sort(function (a, b) {
+  return a.name.localeCompare(b.name);
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const [videos, setVideos] = useState(data);
+  const [videos, setVideos] = useState(dataSorted);
   const [videoId, setVideoId] = useState("");
   const [playerTime, setPlayerTime] = useState(null);
   const currentVideo = videos.find((v) => v.videoId === videoId);
