@@ -1,14 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useKeyPress } from "./useKeyPressed";
 import "./vzPlayer";
+import { VideoWrapper, videoHeight, videoWidth } from "./VideoWrapper";
 
-export const VzaarPlayer = ({
-  videoHeight,
-  videoWidth,
-  start,
-  setPlayerTime,
-  videoId,
-}) => {
+export const VzaarPlayer = ({ start, setPlayerTime, videoId }) => {
   // eslint-disable-next-line no-undef
   const player = useRef(null);
   const [startTime, setStartTime] = useState(0);
@@ -65,17 +60,19 @@ export const VzaarPlayer = ({
   );
 
   return (
-    <iframe
-      width={videoWidth}
-      height={videoHeight}
-      src={`//view.vzaar.com/${videoId}/player?autoplay=true`}
-      frameborder="0"
-      allowfullscreen="true"
-      allowtransparency="true"
-      allow="autoplay"
-      id={`vzvd-${videoId}`}
-      name={`vzvd-${videoId}`}
-      title="video"
-    ></iframe>
+    <VideoWrapper>
+      <iframe
+        width={videoWidth}
+        height={videoHeight}
+        src={`//view.vzaar.com/${videoId}/player?autoplay=true`}
+        frameborder="0"
+        allowfullscreen="true"
+        allowtransparency="true"
+        allow="autoplay"
+        id={`vzvd-${videoId}`}
+        name={`vzvd-${videoId}`}
+        title="video"
+      ></iframe>
+    </VideoWrapper>
   );
 };

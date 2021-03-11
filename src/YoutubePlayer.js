@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 import { useKeyPress } from "./useKeyPressed";
+import { VideoWrapper, videoHeight, videoWidth } from "./VideoWrapper";
 
 export const YoutubePlayer = (props) => {
   const player = useRef(null);
-  const { videoId, videoHeight, videoWidth, start, setPlayerTime } = props;
+  const { videoId, start, setPlayerTime } = props;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -57,15 +58,17 @@ export const YoutubePlayer = (props) => {
   };
 
   return (
-    <YouTube
-      videoId={videoId}
-      onReady={onReady}
-      onStateChange={onStateChange}
-      opts={{
-        height: videoHeight,
-        width: videoWidth,
-        playerVars: { autoplay: 1, modestbranding: 1, start },
-      }}
-    />
+    <VideoWrapper>
+      <YouTube
+        videoId={videoId}
+        onReady={onReady}
+        onStateChange={onStateChange}
+        opts={{
+          height: videoHeight,
+          width: videoWidth,
+          playerVars: { autoplay: 1, modestbranding: 1, start },
+        }}
+      />
+    </VideoWrapper>
   );
 };
