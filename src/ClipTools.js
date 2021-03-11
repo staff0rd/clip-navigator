@@ -117,7 +117,12 @@ export const ClipTools = (props) => {
             <u>D</u>elete last clip
           </Typography>
         </MenuItem>
-        <MenuItem onClick={() => handleClose() && exportJson()}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            exportJson();
+          }}
+        >
           <ListItemIcon>
             <SaveAltIcon fontSize="small" />
           </ListItemIcon>
