@@ -1,9 +1,9 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from 'tss-react/mui';
 
 export const videoWidth = 640;
 export const videoHeight = 360;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   videoWrapper: {
     marginTop: theme.spacing(0.5),
     position: "relative",
@@ -20,6 +20,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const VideoWrapper = ({ children }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return <div className={classes.videoWrapper}>{children}</div>;
 };

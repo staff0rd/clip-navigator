@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import { VzaarPlayer } from "./VzaarPlayer";
-import FormControl from "@material-ui/core/FormControl";
-import Grid from "@material-ui/core/Grid";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import { makeStyles } from "@material-ui/core/styles";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import { makeStyles } from 'tss-react/mui';
 import data from "./bubble-bobble";
-import Skeleton from "@material-ui/lab/Skeleton";
+import Skeleton from "@mui/material/Skeleton";
 import { ClipNavigator } from "./ClipNavigator";
 import { ClipTools } from "./ClipTools";
 import { ClipDetails } from "./ClipDetails";
@@ -19,19 +19,14 @@ const dataSorted = data.sort(function (a, b) {
   return a.name.localeCompare(b.name);
 });
 
-const useStyles = makeStyles((theme) => ({
-  selectors: {
-    marginBottom: theme.spacing(1),
-    display: "flex",
-    justifyContent: "space-between",
-  },
+const useStyles = makeStyles()((theme) => ({
   topTools: {
     marginTop: theme.spacing(1),
   },
 }));
 
 function App() {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [videos, setVideos] = useState(dataSorted);
   const [videoId, setVideoId] = useState("");
   const [playerTime, setPlayerTime] = useState(null);
@@ -52,7 +47,9 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <Grid container justify="space-between">
+      <Grid container sx={
+        {justifyContent: 'space-between'}
+      }>
         <Grid item xs={12} sm={5} className={classes.topTools}>
           <FormControl
             fullWidth
@@ -90,7 +87,7 @@ function App() {
                 clips={currentVideo.clips}
               />
             </Grid>
-            <Grid item className={classes.topTools}>
+            <Grid item className={classes.topTools}sx={{display: 'flex', alignItems: 'center'}}>
               <ClipTools
                 setCurrentClipNumber={setCurrentClipNumber}
                 currentClipNumber={playerInferredClipNumber}

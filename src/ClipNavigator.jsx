@@ -1,10 +1,10 @@
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
-import IconButton from "@material-ui/core/IconButton";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import IconButton from "@mui/material/IconButton";
 
 export const ClipNavigator = (props) => {
   const { currentClipNumber, setCurrentClipNumber, clips } = props;
@@ -20,7 +20,7 @@ export const ClipNavigator = (props) => {
     if (currentClipNumber > 1) setCurrentClipNumber(currentClipNumber - 1);
   };
   return (
-    <div>
+    <div style={{display: 'flex', alignItems: 'center'}}>
       <IconButton aria-label="previous" onClick={previousClip}>
         <SkipPreviousIcon />
       </IconButton>

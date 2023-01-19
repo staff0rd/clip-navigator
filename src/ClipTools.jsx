@@ -1,15 +1,15 @@
 import { useState } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Typography from "@material-ui/core/Typography";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
-import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Typography from "@mui/material/Typography";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import MenuIcon from "@mui/icons-material/Menu";
 import copy from "copy-to-clipboard";
-import Snackbar from "@material-ui/core/Snackbar";
+import Snackbar from "@mui/material/Snackbar";
 import { useKeyPress } from "./useKeyPressed";
 
 export const ClipTools = (props) => {
