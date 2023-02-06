@@ -95,7 +95,10 @@
       { "level": 89, "timestamp": 2516 },
       { "level": 90, "timestamp": 2529 },
       { "level": 91, "timestamp": 2559 },
-      { "level": 92, "timestamp": 2586 }
+      { "level": 92, "timestamp": 2586 },
+      { "level": 93, "timestamp": 2613 },
+      { "level": 94, "timestamp": 2629 },
+      { "level": 95, "timestamp": 2658 }
     ]
   },
   {
@@ -651,7 +654,37 @@
       { "level": 67, "timestamp": 2389 },
       { "level": 68, "timestamp": 2390 },
       { "level": 69, "timestamp": 2390 },
-      { "level": 70, "timestamp": 2391 }
+      { "level": 70, "timestamp": 2391 },
+      { "level": 71, "timestamp": 2444 },
+      { "level": 72, "timestamp": 2501 },
+      { "level": 73, "timestamp": 2533 },
+      { "level": 74, "timestamp": 2578 },
+      { "level": 75, "timestamp": 2603 },
+      { "level": 76, "timestamp": 2637 },
+      { "level": 77, "timestamp": 2688 },
+      { "level": 78, "timestamp": 2772 },
+      { "level": 79, "timestamp": 2813 },
+      { "level": 80, "timestamp": 2850 },
+      { "level": 81, "timestamp": 2850 },
+      { "level": 82, "timestamp": 2894 },
+      { "level": 83, "timestamp": 2921 },
+      { "level": 84, "timestamp": 3058 },
+      { "level": 85, "timestamp": 3083 },
+      { "level": 86, "timestamp": 3110 },
+      { "level": 87, "timestamp": 3126 },
+      { "level": 88, "timestamp": 3159 },
+      { "level": 89, "timestamp": 3212 },
+      { "level": 90, "timestamp": 3237 },
+      { "level": 91, "timestamp": 3273 },
+      { "level": 92, "timestamp": 3300 },
+      { "level": 93, "timestamp": 3326 },
+      { "level": 94, "timestamp": 3392 },
+      { "level": 95, "timestamp": 3445 },
+      { "level": 96, "timestamp": 3493 },
+      { "level": 97, "timestamp": 3620 },
+      { "level": 98, "timestamp": 3621 },
+      { "level": 99, "timestamp": 3671 },
+      { "level": 100, "timestamp": 3719 }
     ]
   },
   {
