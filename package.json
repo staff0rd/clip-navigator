@@ -6,7 +6,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && rm -rf ../blog/static && mv dist/static ../blog/static && node src/package.js ./dist/index.html && mv ./out.html ../blog/_includes/bubble-bobble.html"
+    "deploy": "run-s deploy:*",
+    "deploy:1-build": "vite build",
+    "deploy:2-clear-static": "rm -rf ../blog/static",
+    "deploy:3-deploy-static": "mv dist/static ../blog/static",
+    "deploy:4-prepare-index": "node src/package.js ./dist/index.html",
+    "deploy:5-deploy-index": "mv ./out.html ../blog/_includes/bubble-bobble.html",
+    "deploy:6-deploy-data": "cp ./public/static/bubble-bobble.json ../blog/static"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -24,6 +30,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
+    "npm-run-all": "^4.1.5",
     "vite": "^4.0.0"
   }
 }

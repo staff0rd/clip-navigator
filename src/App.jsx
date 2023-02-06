@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { YoutubePlayer } from "./YoutubePlayer";
 import { VzaarPlayer } from "./VzaarPlayer";
 import FormControl from "@mui/material/FormControl";
@@ -6,18 +6,13 @@ import Grid from "@mui/material/Grid";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import { makeStyles } from 'tss-react/mui';
-import data from "./bubble-bobble";
+import { makeStyles } from "tss-react/mui";
 import Skeleton from "@mui/material/Skeleton";
 import { ClipNavigator } from "./ClipNavigator";
 import { ClipTools } from "./ClipTools";
 import { ClipDetails } from "./ClipDetails";
 import { getClipNumberFromPlayerTime } from "./getClipNumberFromPlayerTime";
 import { VideoWrapper } from "./VideoWrapper";
-
-const dataSorted = data.sort(function (a, b) {
-  return a.name.localeCompare(b.name);
-});
 
 const useStyles = makeStyles()((theme) => ({
   topTools: {
@@ -27,7 +22,18 @@ const useStyles = makeStyles()((theme) => ({
 
 function App() {
   const { classes } = useStyles();
-  const [videos, setVideos] = useState(dataSorted);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetch("/static/bubble-bobble.json");
+      const json = await data.json();
+      const dataSorted = json.sort(function (a, b) {
+        return a.name.localeCompare(b.name);
+      });
+      setVideos(dataSorted);
+    };
+    getData();
+  }, []);
+  const [videos, setVideos] = useState([]);
   const [videoId, setVideoId] = useState("");
   const [playerTime, setPlayerTime] = useState(null);
   const currentVideo = videos.find((v) => v.videoId === videoId);
@@ -47,9 +53,7 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <Grid container sx={
-        {justifyContent: 'space-between'}
-      }>
+      <Grid container sx={{ justifyContent: "space-between" }}>
         <Grid item xs={12} sm={5} className={classes.topTools}>
           <FormControl
             fullWidth
@@ -70,7 +74,7 @@ function App() {
               <MenuItem value={""} disabled>
                 Choose video...
               </MenuItem>
-              {data.map((v, ix) => (
+              {videos.map((v, ix) => (
                 <MenuItem key={`video-${ix}`} value={v.videoId}>
                   {v.name}
                 </MenuItem>
@@ -87,7 +91,11 @@ function App() {
                 clips={currentVideo.clips}
               />
             </Grid>
-            <Grid item className={classes.topTools}sx={{display: 'flex', alignItems: 'center'}}>
+            <Grid
+              item
+              className={classes.topTools}
+              sx={{ display: "flex", alignItems: "center" }}
+            >
               <ClipTools
                 setCurrentClipNumber={setCurrentClipNumber}
                 currentClipNumber={playerInferredClipNumber}
